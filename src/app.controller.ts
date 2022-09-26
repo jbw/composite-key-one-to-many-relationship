@@ -1,12 +1,33 @@
-import { Controller, Get } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Post, Query } from '@nestjs/common';
 import { AppService } from './app.service';
 
-@Controller()
+@Controller('orders')
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
   @Get()
-  getHello(): string {
-    return this.appService.getHello();
+  async getOrder(
+    @Query('customerId') customerId: string,
+    @Query('companyId') companyId: string,
+    @Query('orderId') orderId: string,
+  ) {
+    return this.appService.getOrder(orderId, customerId, companyId);
+  }
+
+  @Post()
+  async createOrder(
+    @Body('customerId') customerId: string,
+    @Body('companyId') companyId: string,
+  ) {
+    return this.appService.createOrder(customerId, companyId);
+  }
+
+  @Delete()
+  async deleteOrders(
+    @Body('customerId') customerId: string,
+    @Body('companyId') companyId: string,
+    @Body('orderId') orderId: string,
+  ) {
+    return this.appService.deleteOrderEvents(orderId, customerId, companyId);
   }
 }
