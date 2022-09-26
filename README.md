@@ -15,8 +15,8 @@ docker run \
  npx mikro-orm migration:fresh
 ```
 
-## Run the app
+## Run the tests
 
 ```sh
-yarn start:dev
+yarn test
 ```
